@@ -1,0 +1,26 @@
+{{ $urlPre := "https://api.github.com/repos" }}
+{{ $username := "Douglasokolaa" }}
+{{ $repo := "camel-website"}}
+{{ $token := "a2e7c248a8cb96ce745bf0590241cf288a5a8947"}}
+{{ $scope := "all"}}
+{{ $contrJ := getJSON $urlPre "/" $username "/" $repo "/collaborators?access_token=" $token  }}
+
+<table class="tableblock frame-all grid-all stretch">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Organisation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{range $contrJ}}
+        {{$user := getJSON .url}}
+        {{if $user.name  }}
+        <tr>
+            <td> {{$user.name}} </td>
+            <td> {{$user.company}} </td>
+        </tr>
+        {{end}}
+        {{end}}
+    </tbody>
+</table>

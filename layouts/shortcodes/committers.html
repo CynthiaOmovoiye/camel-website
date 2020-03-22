@@ -1,0 +1,28 @@
+  {{ $urlPre := "https://projects.apache.org" }}
+  {{ $group := getJSON $urlPre "/json/foundation/groups.json" }}
+  {{ $pname := getJSON $urlPre "/json/foundation/people_name.json" }}
+  {{$orgnisations := getJSON "" "data/teamdata.json" }}
+<br>
+<table class="tableblock frame-all grid-all stretch">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Organisation</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range $group.camel}}
+    {{ $id:= . }} 
+  <tr>
+    <td>{{index $pname $id}}</td>
+    <td>{{$id}}</td>
+    <td>{{index $orgnisations  $id}} </td>
+  </tr>
+  {{end}}
+
+  </tbody>
+</table>
+
+
+
